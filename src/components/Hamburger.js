@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
+    display: none;
     flex: 1;
     height: 100vh;
     z-index: 9;
@@ -81,9 +82,19 @@ const Para = styled.p`
     color: #fff;
 `;
 
-const Hamburger = () => {
+const Hamburger = ({ state }) => {
+    const menu = useRef();
+
+    useEffect(() => {
+        if (state) {
+            menu.current.style.display = 'block';
+        } else {
+            menu.current.style.display = 'none';
+        }
+    }, [state]);
+
     return (
-        <Container>
+        <Container ref={menu}>
             <SecondaryBackground>
                 <Wrapper>
                     <Content>

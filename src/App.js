@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from './components/Header';
-import Hamburger from './components/Hamburger';
 
 const Container = styled.div`
     height: 100vh;
@@ -10,6 +9,7 @@ const Container = styled.div`
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    position: relative;
 `;
 const Wrapper = styled.div`
   flex: 9;
@@ -22,14 +22,14 @@ function App() {
     <Router>
       <Container>
         <Header />
-        {/* <Wrapper>
+        <Wrapper>
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/opportunities' component={Opportunities} />
               <Route exact path='/solutions' component={Solutions} />
               <Route exact path='/contact-us' component={Contact} />
             </Switch>
-        </Wrapper> */}
+        </Wrapper>
       </Container>
     </Router>
   );

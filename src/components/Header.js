@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Hamburger from './Hamburger';
 
 const Container = styled.header`
     flex: 1;
     padding: 10px 15%;
-    position: relative;
 `;
 const Content = styled.div`
     display: flex;
@@ -27,18 +26,24 @@ const Menu = styled.p`
     z-index: 10;
 `;
 
-const Header = () => {
+const Header = ({history}) => {
+    const [menuState, toggleMenu] = useState(false);
+    useEffect(() => {
+        history.listen(() => {
+            toggleMenu(false);
+        });
+    });
     return (
         <Container>
             <Content>
                 <Home>
-                    <Link style={{ textDecoration: 'none', color: '#000' }} to="/home">Hamburg</Link>
+                    <Link style={{ textDecoration: 'none', color: '#000' }} to="/">Hamburg</Link>
                 </Home>
-                <Menu>Menu</Menu>
+                <Menu onClick={() => toggleMenu(!menuState)}>Menu</Menu>
             </Content>
-            <Hamburger />
+            <Hamburger state={menuState} />
         </Container>
     );
 };
 
-export default Header;
+export default withRouter(Header);
